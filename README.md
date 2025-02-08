@@ -40,5 +40,5 @@ log.Println("LawTitle:", schema.LawBody.LawTitle.CharData)
 Copyright &copy; 2025 [Atushi Nagase]. All rights reserved.
 
 [Atushi Nagase]: https://ngs.io/
-[xmldoc]: https://laws.e-gov.go.jp/docs/
+[xmldoc]: https://laws.e-gov.go.jp/docs/law-data-basic/419a603-xml-schema-for-japanese-law/
 

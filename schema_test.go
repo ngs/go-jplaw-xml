@@ -26,6 +26,34 @@ func TestParseSchema(t *testing.T) {
 		t.Fatalf("Failed to parse schema: %v", err)
 	}
 
+	if schema.LawType != LawTypeAct {
+		t.Errorf("Expected LawType to be '%s', got '%s'", LawTypeAct, schema.LawType)
+	}
+
+	if schema.Era != EraShowa {
+		t.Errorf("Expected Era to be '%s', got '%s'", EraShowa, schema.Era)
+	}
+
+	if schema.Year != 27 {
+		t.Errorf("Expected Year to be 27, got %d", schema.Year)
+	}
+
+	if schema.Num != 231 {
+		t.Errorf("Expected Num to be 231, got %d", schema.Num)
+	}
+
+	if schema.PromulgateMonth != 7 {
+		t.Errorf("Expected PromulgateMonth to be 7, got %d", schema.PromulgateMonth)
+	}
+
+	if schema.PromulgateDay != 15 {
+		t.Errorf("Expected PromulgateDay to be 15, got %d", schema.PromulgateDay)
+	}
+
+	if schema.Lang != LanguageJapanese {
+		t.Errorf("Expected Lang to be 'ja', got '%s'", schema.Lang)
+	}
+
 	if schema.LawNum == "" {
 		t.Error("Expected LawNum to be non-empty")
 	}

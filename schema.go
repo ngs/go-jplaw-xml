@@ -1,7 +1,14 @@
 package jplaw
 
 type Law struct {
-	LawBody struct {
+	Era             Era      `xml:"Era,attr"`
+	Year            int      `xml:"Year,attr"`
+	Num             int      `xml:"Num,attr"`
+	PromulgateMonth int      `xml:"PromulgateMonth,attr"`
+	PromulgateDay   int      `xml:"PromulgateDay,attr"`
+	LawType         LawType  `xml:"LawType,attr"`
+	Lang            Language `xml:"Lang,attr"`
+	LawBody         struct {
 		AppdxTable struct {
 			Num             int `xml:"Num,attr"`
 			AppdxTableTitle struct {
