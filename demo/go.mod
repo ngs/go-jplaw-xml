@@ -1,6 +1,6 @@
 module github.com/ngs/go-jplaw-xml/demo
 
-go 1.22.1
+go 1.23.6
 
 replace github.com/ngs/go-jplaw-xml => ..
 
