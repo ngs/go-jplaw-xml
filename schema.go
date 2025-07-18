@@ -3,14 +3,14 @@ package jplaw
 type Law struct {
 	Era             Era      `xml:"Era,attr"`
 	Year            int      `xml:"Year,attr"`
-	Num             int      `xml:"Num,attr"`
+	Num             string   `xml:"Num,attr"`
 	PromulgateMonth int      `xml:"PromulgateMonth,attr"`
 	PromulgateDay   int      `xml:"PromulgateDay,attr"`
 	LawType         LawType  `xml:"LawType,attr"`
 	Lang            Language `xml:"Lang,attr"`
 	LawBody         struct {
 		AppdxTable struct {
-			Num             int `xml:"Num,attr"`
+			Num             string `xml:"Num,attr"`
 			AppdxTableTitle struct {
 				WritingMode string `xml:"WritingMode,attr"`
 				CharData    string `xml:",chardata"`
@@ -26,7 +26,7 @@ type Law struct {
 							BorderRight  string `xml:"BorderRight,attr"`
 							BorderTop    string `xml:"BorderTop,attr"`
 							Sentence     []struct {
-								Num         int    `xml:"Num,attr"`
+								Num         string `xml:"Num,attr"`
 								WritingMode string `xml:"WritingMode,attr"`
 								CharData    string `xml:",chardata"`
 							} `xml:"Sentence"`
@@ -43,7 +43,7 @@ type Law struct {
 		} `xml:"LawTitle"`
 		MainProvision struct {
 			Chapter []struct {
-				Num     int `xml:"Num,attr"`
+				Num     string `xml:"Num,attr"`
 				Article []struct {
 					Num            string `xml:"Num,attr"`
 					ArticleCaption *struct {
@@ -55,30 +55,30 @@ type Law struct {
 					} `xml:"ArticleCaption"`
 					ArticleTitle string `xml:"ArticleTitle"`
 					Paragraph    []struct {
-						Num  int `xml:"Num,attr"`
+						Num  string `xml:"Num,attr"`
 						Item []struct {
 							Num          float64 `xml:"Num,attr"`
 							ItemSentence struct {
 								Column []struct {
-									Num      int `xml:"Num,attr"`
+									Num      string `xml:"Num,attr"`
 									Sentence struct {
-										Num         int    `xml:"Num,attr"`
+										Num         string `xml:"Num,attr"`
 										WritingMode string `xml:"WritingMode,attr"`
 										CharData    string `xml:",chardata"`
 									} `xml:"Sentence"`
 								} `xml:"Column"`
 								Sentence *struct {
-									Num         int    `xml:"Num,attr"`
+									Num         string `xml:"Num,attr"`
 									WritingMode string `xml:"WritingMode,attr"`
 									CharData    string `xml:",chardata"`
 								} `xml:"Sentence"`
 							} `xml:"ItemSentence"`
 							ItemTitle string `xml:"ItemTitle"`
 							Subitem1  []struct {
-								Num              int `xml:"Num,attr"`
+								Num              string `xml:"Num,attr"`
 								Subitem1Sentence struct {
 									Sentence struct {
-										Num         int    `xml:"Num,attr"`
+										Num         string `xml:"Num,attr"`
 										WritingMode string `xml:"WritingMode,attr"`
 										CharData    string `xml:",chardata"`
 										Ruby        *struct {
@@ -93,7 +93,7 @@ type Law struct {
 						List []struct {
 							ListSentence struct {
 								Sentence struct {
-									Num         int    `xml:"Num,attr"`
+									Num         string `xml:"Num,attr"`
 									WritingMode string `xml:"WritingMode,attr"`
 									CharData    string `xml:",chardata"`
 								} `xml:"Sentence"`
@@ -103,7 +103,7 @@ type Law struct {
 						ParagraphSentence struct {
 							Sentence []struct {
 								Function    *string `xml:"Function,attr"`
-								Num         int     `xml:"Num,attr"`
+								Num         string  `xml:"Num,attr"`
 								WritingMode string  `xml:"WritingMode,attr"`
 								CharData    string  `xml:",chardata"`
 								Ruby        []struct {
@@ -122,7 +122,7 @@ type Law struct {
 										BorderRight  string `xml:"BorderRight,attr"`
 										BorderTop    string `xml:"BorderTop,attr"`
 										Sentence     []struct {
-											Num         int    `xml:"Num,attr"`
+											Num         string `xml:"Num,attr"`
 											WritingMode string `xml:"WritingMode,attr"`
 											CharData    string `xml:",chardata"`
 										} `xml:"Sentence"`
@@ -134,18 +134,18 @@ type Law struct {
 				} `xml:"Article"`
 				ChapterTitle string `xml:"ChapterTitle"`
 				Section      []struct {
-					Num     int `xml:"Num,attr"`
+					Num     string `xml:"Num,attr"`
 					Article []struct {
 						Num            float64 `xml:"Num,attr"`
 						ArticleCaption *string `xml:"ArticleCaption"`
 						ArticleTitle   string  `xml:"ArticleTitle"`
 						Paragraph      []struct {
-							Num  int `xml:"Num,attr"`
+							Num  string `xml:"Num,attr"`
 							Item []struct {
-								Num          int `xml:"Num,attr"`
+								Num          string `xml:"Num,attr"`
 								ItemSentence struct {
 									Sentence struct {
-										Num         int    `xml:"Num,attr"`
+										Num         string `xml:"Num,attr"`
 										WritingMode string `xml:"WritingMode,attr"`
 										CharData    string `xml:",chardata"`
 									} `xml:"Sentence"`
@@ -156,7 +156,7 @@ type Law struct {
 							ParagraphSentence struct {
 								Sentence []struct {
 									Function    *string `xml:"Function,attr"`
-									Num         int     `xml:"Num,attr"`
+									Num         string  `xml:"Num,attr"`
 									WritingMode string  `xml:"WritingMode,attr"`
 									CharData    string  `xml:",chardata"`
 								} `xml:"Sentence"`
@@ -165,36 +165,36 @@ type Law struct {
 					} `xml:"Article"`
 					SectionTitle string `xml:"SectionTitle"`
 					Subsection   []struct {
-						Num     int `xml:"Num,attr"`
+						Num     string `xml:"Num,attr"`
 						Article []struct {
 							Num            float64 `xml:"Num,attr"`
 							ArticleCaption string  `xml:"ArticleCaption"`
 							ArticleTitle   string  `xml:"ArticleTitle"`
 							Paragraph      []struct {
-								Num  int `xml:"Num,attr"`
+								Num  string `xml:"Num,attr"`
 								Item []struct {
-									Num          int `xml:"Num,attr"`
+									Num          string `xml:"Num,attr"`
 									ItemSentence struct {
 										Column []struct {
-											Num      int `xml:"Num,attr"`
+											Num      string `xml:"Num,attr"`
 											Sentence struct {
-												Num         int    `xml:"Num,attr"`
+												Num         string `xml:"Num,attr"`
 												WritingMode string `xml:"WritingMode,attr"`
 												CharData    string `xml:",chardata"`
 											} `xml:"Sentence"`
 										} `xml:"Column"`
 										Sentence *struct {
-											Num         int    `xml:"Num,attr"`
+											Num         string `xml:"Num,attr"`
 											WritingMode string `xml:"WritingMode,attr"`
 											CharData    string `xml:",chardata"`
 										} `xml:"Sentence"`
 									} `xml:"ItemSentence"`
 									ItemTitle string `xml:"ItemTitle"`
 									Subitem1  []struct {
-										Num              int `xml:"Num,attr"`
+										Num              string `xml:"Num,attr"`
 										Subitem1Sentence struct {
 											Sentence struct {
-												Num         int    `xml:"Num,attr"`
+												Num         string `xml:"Num,attr"`
 												WritingMode string `xml:"WritingMode,attr"`
 												CharData    string `xml:",chardata"`
 											} `xml:"Sentence"`
@@ -206,7 +206,7 @@ type Law struct {
 								ParagraphSentence struct {
 									Sentence []struct {
 										Function    *string `xml:"Function,attr"`
-										Num         int     `xml:"Num,attr"`
+										Num         string  `xml:"Num,attr"`
 										WritingMode string  `xml:"WritingMode,attr"`
 										CharData    string  `xml:",chardata"`
 									} `xml:"Sentence"`
@@ -221,7 +221,7 @@ type Law struct {
 												BorderRight  string `xml:"BorderRight,attr"`
 												BorderTop    string `xml:"BorderTop,attr"`
 												Sentence     []struct {
-													Num         int    `xml:"Num,attr"`
+													Num         string `xml:"Num,attr"`
 													WritingMode string `xml:"WritingMode,attr"`
 													CharData    string `xml:",chardata"`
 												} `xml:"Sentence"`
@@ -240,24 +240,24 @@ type Law struct {
 			AmendLawNum string `xml:"AmendLawNum,attr"`
 			Extract     *bool  `xml:"Extract,attr"`
 			Article     []struct {
-				Num            int     `xml:"Num,attr"`
+				Num            string  `xml:"Num,attr"`
 				ArticleCaption *string `xml:"ArticleCaption"`
 				ArticleTitle   string  `xml:"ArticleTitle"`
 				Paragraph      []struct {
-					Num  int `xml:"Num,attr"`
+					Num  string `xml:"Num,attr"`
 					Item []struct {
 						Num          string `xml:"Num,attr"`
 						ItemSentence struct {
 							Column []struct {
-								Num      int `xml:"Num,attr"`
+								Num      string `xml:"Num,attr"`
 								Sentence struct {
-									Num         int    `xml:"Num,attr"`
+									Num         string `xml:"Num,attr"`
 									WritingMode string `xml:"WritingMode,attr"`
 									CharData    string `xml:",chardata"`
 								} `xml:"Sentence"`
 							} `xml:"Column"`
 							Sentence *struct {
-								Num         int    `xml:"Num,attr"`
+								Num         string `xml:"Num,attr"`
 								WritingMode string `xml:"WritingMode,attr"`
 								CharData    string `xml:",chardata"`
 							} `xml:"Sentence"`
@@ -268,7 +268,7 @@ type Law struct {
 					ParagraphSentence struct {
 						Sentence []struct {
 							Function    *string `xml:"Function,attr"`
-							Num         int     `xml:"Num,attr"`
+							Num         string  `xml:"Num,attr"`
 							WritingMode string  `xml:"WritingMode,attr"`
 							CharData    string  `xml:",chardata"`
 						} `xml:"Sentence"`
@@ -283,7 +283,7 @@ type Law struct {
 									BorderRight  string `xml:"BorderRight,attr"`
 									BorderTop    string `xml:"BorderTop,attr"`
 									Sentence     []struct {
-										Num         int    `xml:"Num,attr"`
+										Num         string `xml:"Num,attr"`
 										WritingMode string `xml:"WritingMode,attr"`
 										CharData    string `xml:",chardata"`
 									} `xml:"Sentence"`
@@ -294,20 +294,20 @@ type Law struct {
 				} `xml:"Paragraph"`
 			} `xml:"Article"`
 			Paragraph []struct {
-				Num  int `xml:"Num,attr"`
+				Num  string `xml:"Num,attr"`
 				Item []struct {
 					Num          string `xml:"Num,attr"`
 					ItemSentence struct {
 						Column []struct {
-							Num      int `xml:"Num,attr"`
+							Num      string `xml:"Num,attr"`
 							Sentence struct {
-								Num         int    `xml:"Num,attr"`
+								Num         string `xml:"Num,attr"`
 								WritingMode string `xml:"WritingMode,attr"`
 								CharData    string `xml:",chardata"`
 							} `xml:"Sentence"`
 						} `xml:"Column"`
 						Sentence *struct {
-							Num         int    `xml:"Num,attr"`
+							Num         string `xml:"Num,attr"`
 							WritingMode string `xml:"WritingMode,attr"`
 							CharData    string `xml:",chardata"`
 						} `xml:"Sentence"`
@@ -319,7 +319,7 @@ type Law struct {
 				ParagraphSentence struct {
 					Sentence []struct {
 						Function    *string `xml:"Function,attr"`
-						Num         int     `xml:"Num,attr"`
+						Num         string  `xml:"Num,attr"`
 						WritingMode string  `xml:"WritingMode,attr"`
 						CharData    string  `xml:",chardata"`
 						Ruby        []struct {
@@ -333,15 +333,15 @@ type Law struct {
 		} `xml:"SupplProvision"`
 		TOC struct {
 			TOCChapter []struct {
-				Num          int     `xml:"Num,attr"`
+				Num          string  `xml:"Num,attr"`
 				ArticleRange *string `xml:"ArticleRange"`
 				ChapterTitle string  `xml:"ChapterTitle"`
 				TOCSection   []struct {
-					Num           int     `xml:"Num,attr"`
+					Num           string  `xml:"Num,attr"`
 					ArticleRange  *string `xml:"ArticleRange"`
 					SectionTitle  string  `xml:"SectionTitle"`
 					TOCSubsection []struct {
-						Num             int    `xml:"Num,attr"`
+						Num             string `xml:"Num,attr"`
 						ArticleRange    string `xml:"ArticleRange"`
 						SubsectionTitle string `xml:"SubsectionTitle"`
 					} `xml:"TOCSubsection"`

@@ -38,8 +38,8 @@ func TestParseSchema(t *testing.T) {
 		t.Errorf("Expected Year to be 27, got %d", schema.Year)
 	}
 
-	if schema.Num != 231 {
-		t.Errorf("Expected Num to be 231, got %d", schema.Num)
+	if schema.Num != "231" {
+		t.Errorf("Expected Num to be 231, got %s", schema.Num)
 	}
 
 	if schema.PromulgateMonth != 7 {
