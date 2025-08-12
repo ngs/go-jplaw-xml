@@ -1,6 +1,9 @@
 package jplaw
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+	"fmt"
+)
 
 // Law represents the root element of a Japanese law document
 type Law struct {
@@ -743,18 +746,67 @@ type Subitem10Sentence struct {
 }
 
 // Sentence represents a sentence
+// NOTE: This type now uses custom XML unmarshaling to properly handle mixed content with inline Ruby elements
 type Sentence struct {
-	Num         int          `xml:"Num,attr,omitempty"`
-	Function    string       `xml:"Function,attr,omitempty"` // main or proviso
-	Indent      string       `xml:"Indent,attr,omitempty"`
-	WritingMode WritingMode  `xml:"WritingMode,attr,omitempty"`
-	Content     string       `xml:",chardata"`
-	Line        []Line       `xml:"Line,omitempty"`
-	QuoteStruct []QuoteStruct `xml:"QuoteStruct,omitempty"`
-	ArithFormula []ArithFormula `xml:"ArithFormula,omitempty"`
-	Ruby        []Ruby       `xml:"Ruby,omitempty"`
-	Sup         []Sup        `xml:"Sup,omitempty"`
-	Sub         []Sub        `xml:"Sub,omitempty"`
+	Num          int             `xml:"Num,attr,omitempty"`
+	Function     string          `xml:"Function,attr,omitempty"` // main or proviso
+	Indent       string          `xml:"Indent,attr,omitempty"`
+	WritingMode  WritingMode     `xml:"WritingMode,attr,omitempty"`
+	Content      string          // Plain text content (backward compatibility)
+	Line         []Line          `xml:"Line,omitempty"`
+	QuoteStruct  []QuoteStruct   `xml:"QuoteStruct,omitempty"`
+	ArithFormula []ArithFormula  `xml:"ArithFormula,omitempty"`
+	Ruby         []Ruby          // Ruby elements (backward compatibility)
+	Sup          []Sup           `xml:"Sup,omitempty"`
+	Sub          []Sub           `xml:"Sub,omitempty"`
+	MixedContent MixedContent    // The properly ordered mixed content
+}
+
+// UnmarshalXML implements custom unmarshaling to handle mixed content
+func (s *Sentence) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+	// Parse attributes
+	for _, attr := range start.Attr {
+		switch attr.Name.Local {
+		case "Num":
+			fmt.Sscanf(attr.Value, "%d", &s.Num)
+		case "Function":
+			s.Function = attr.Value
+		case "Indent":
+			s.Indent = attr.Value
+		case "WritingMode":
+			s.WritingMode = WritingMode(attr.Value)
+		}
+	}
+	
+	// Parse mixed content
+	if err := s.MixedContent.UnmarshalXML(d, start); err != nil {
+		return err
+	}
+	
+	// Set backward compatibility fields
+	s.Content = s.MixedContent.String()
+	
+	// Extract Ruby elements for backward compatibility
+	s.Ruby = []Ruby{}
+	for _, node := range s.MixedContent.Nodes {
+		if rubyNode, ok := node.(RubyNode); ok && rubyNode.IsRuby() {
+			ruby := Ruby{
+				Content: rubyNode.Base,
+				Rt:      make([]Rt, len(rubyNode.Rt)),
+			}
+			for i, rt := range rubyNode.Rt {
+				ruby.Rt[i] = Rt{Content: rt}
+			}
+			s.Ruby = append(s.Ruby, ruby)
+		}
+	}
+	
+	return nil
+}
+
+// HTML returns the HTML representation with properly positioned Ruby tags
+func (s *Sentence) HTML() string {
+	return s.MixedContent.HTML()
 }
 
 // Column represents a column
