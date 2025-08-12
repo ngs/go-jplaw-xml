@@ -1,3 +1,3 @@
-module github.com/ngs/go-jplaw-xml
+module go.ngs.io/jp-law-xml
 
 go 1.23.6
