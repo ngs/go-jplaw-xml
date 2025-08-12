@@ -1,6 +1,7 @@
 package jplaw
 
 import (
+	"encoding/json"
 	"io"
 	"os"
 	"testing"
@@ -18,7 +19,10 @@ func TestParse(t *testing.T) {
 		t.Fatalf("Failed to read file: %v", err)
 	}
 
-	schema, err := Parse(data)
+	var schema Law
+
+	err = json.Unmarshal(data, &schema)
+
 	if err != nil {
 		t.Fatalf("Failed to parse schema: %v", err)
 	}
@@ -70,7 +74,7 @@ func TestParse(t *testing.T) {
 		},
 		{
 			"LawTitle",
-			schema.LawBody.LawTitle.CharData,
+			schema.LawBody.LawTitle.Content,
 			"航空法",
 		},
 		{
@@ -98,6 +102,21 @@ func TestParse(t *testing.T) {
 			schema.LawBody.MainProvision.Chapter[0].Article[1].Paragraph[7].ParagraphSentence.Sentence[0].CharData,
 			"この法律において「進入表面」とは、着陸帯の短辺に接続し、且つ、水平面に対し上方へ五十分の一以上で国土交通省令で定める<ruby>勾<rt>こう</rt></ruby>配を有する平面であつて、その投影面が進入区域と一致するものをいう。",
 		},
+		// {
+		// 	"TableColumnSentence",
+		// 	schema.LawBody.AppdxTable.TableStruct.Table.TableRow[0].TableColumn[0].Sentence[0].CharData,
+		// 	"例<ruby>文<rt>ぶん</rt></ruby>",
+		// },
+		// {
+		// 	"Article8Caption",
+		// 	schema.LawBody.MainProvision.Chapter[1].Article[8].ArticleCaption.CharData,
+		// 	"（<ruby>ま<rt>ヽ</rt></ruby><ruby>つ<rt>ヽ</rt></ruby>消登録）",
+		// },
+		// {
+		// 	"Article90Caption",
+		// 	schema.LawBody.MainProvision.Chapter[5].Article[33].ArticleCaption.CharData,
+		// 	"（落下<ruby>さ<rt>ヽ</rt></ruby><ruby>ん<rt>ヽ</rt></ruby>降下）",
+		// },
 	}
 
 	for _, tt := range tests {
