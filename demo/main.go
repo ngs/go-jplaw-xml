@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"go.ngs.io/jp-law-xml"
+	"go.ngs.io/jplaw-xml"
 )
 
 func main() {

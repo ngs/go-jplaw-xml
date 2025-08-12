@@ -20,7 +20,7 @@ This library provides comprehensive Go struct definitions that fully implement t
 ## Installation
 
 ```sh
-go get go.ngs.io/jp-law-xml
+go get go.ngs.io/jplaw-xml
 ```
 
 ## Usage
@@ -36,7 +36,7 @@ import (
 	"log"
 	"os"
 
-	"go.ngs.io/jp-law-xml"
+	"go.ngs.io/jplaw-xml"
 )
 
 func main() {
