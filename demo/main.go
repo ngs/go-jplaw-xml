@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ngs/go-jplaw-xml"
+	"go.ngs.io/jp-law-xml"
 )
 
 func main() {
@@ -29,15 +29,19 @@ func main() {
 	}
 
 	log.Println("LawNum:", schema.LawNum)
-	log.Println("LawTitle:", schema.LawBody.LawTitle.CharData)
+	if schema.LawBody.LawTitle != nil {
+		log.Println("LawTitle:", schema.LawBody.LawTitle.Content)
+	}
 	for _, chapter := range schema.LawBody.MainProvision.Chapter {
-		log.Println("  Chapter:", chapter.ChapterTitle)
+		log.Println("  Chapter:", chapter.ChapterTitle.Content)
 		for _, article := range chapter.Article {
-			log.Println("    Article:", article.ArticleTitle)
+			if article.ArticleTitle != nil {
+				log.Println("    Article:", article.ArticleTitle.Content)
+			}
 			for _, paragraph := range article.Paragraph {
-				log.Println("     Paragraph:", paragraph.ParagraphNum)
+				log.Println("     Paragraph:", paragraph.ParagraphNum.Content)
 				for _, sentence := range paragraph.ParagraphSentence.Sentence {
-					log.Println("      Sentence:", sentence.CharData)
+					log.Println("      Sentence:", sentence.Content)
 				}
 			}
 		}

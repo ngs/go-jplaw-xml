@@ -1,7 +1,7 @@
-module github.com/ngs/go-jplaw-xml/demo
+module go.ngs.io/jp-law-xml/demo
 
 go 1.23.6
 
-replace github.com/ngs/go-jplaw-xml => ..
+replace go.ngs.io/jp-law-xml => ..
 
-require github.com/ngs/go-jplaw-xml v0.0.0-00010101000000-000000000000
+require go.ngs.io/jp-law-xml v0.0.0-00010101000000-000000000000
