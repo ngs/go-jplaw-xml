@@ -3,7 +3,9 @@
     "allow": [
       "WebFetch(domain:laws.e-gov.go.jp)",
       "Bash(curl:*)",
-      "Bash(go test:*)"
+      "Bash(go test:*)",
+      "Bash(git tag:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
